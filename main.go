@@ -1,24 +1,30 @@
 package main
 
 import (
-	"bytes"
-	"io"
+	"embed"
+	"log"
 	"net/http"
+	"text/template"
 
 	"github.com/syumai/workers"
 )
 
+//go:embed templates/*
+var templates embed.FS
+
 func main() {
-	http.HandleFunc("/hello", func(w http.ResponseWriter, req *http.Request) {
-		msg := "Hello!"
-		w.Write([]byte(msg))
-	})
-	http.HandleFunc("/echo", func(w http.ResponseWriter, req *http.Request) {
-		b, err := io.ReadAll(req.Body)
+	tmpl, err := template.ParseFS(templates, "templates/*")
+	if err != nil {
+		log.Fatalf("template parse error: %v", err)
+	}
+
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		err = tmpl.ExecuteTemplate(w, "hello.go.tmpl", map[string]interface{}{"Name": "World"})
 		if err != nil {
-			panic(err)
+			log.Fatalf("template execute error: %v", err)
+			return
 		}
-		io.Copy(w, bytes.NewReader(b))
 	})
+
 	workers.Serve(nil) // use http.DefaultServeMux
 }
