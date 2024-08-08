@@ -2,6 +2,10 @@
 dev:
 	wrangler dev
 
+.PHONY: generate
+generate:
+	templ generate
+
 .PHONY: build
 build:
 	go run github.com/syumai/workers/cmd/workers-assets-gen@v0.23.1
