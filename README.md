@@ -3,6 +3,7 @@
 ## Dependencies
 
 - `npm install -g wrangler`
+- `go install github.com/a-h/templ/cmd/templ@latest`
 
 ## Command
 
