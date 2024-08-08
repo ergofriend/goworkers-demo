@@ -1,4 +1,4 @@
-# go-htmx-workers
+# goworkers-demo
 
 ## Dependencies
 
