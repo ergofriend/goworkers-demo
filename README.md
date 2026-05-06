@@ -1,5 +1,7 @@
 # goworkers-demo
 
+from: [Goのテンプレートエンジン「templ」が便利（TinyGoでも動くよ） - kasu.log](https://ergofriend.hatenablog.com/entry/2024/08/08/230603)
+
 ## References
 
 - [syumai/workers: Go package to run an HTTP server on Cloudflare Workers.](https://github.com/syumai/workers)
